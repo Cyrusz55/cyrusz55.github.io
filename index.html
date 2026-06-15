@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyrus Ndung'u | Data Scientist & Analyst</title>
+  <title>Cyrus Ndung'u | Data Scientist & ML Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -24,11 +24,26 @@
       --shadow: 0 4px 32px rgba(13,27,42,0.10);
       --shadow-hover: 0 12px 48px rgba(13,27,42,0.18);
       --radius: 16px;
+
+      /* Motion easing palette */
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+      --ease-soft: cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -84,10 +99,29 @@
       font-weight: 500;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      transition: color 0.2s;
+      transition: color 0.2s var(--ease-out);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s var(--ease-out);
     }
 
     .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 6px;
+      border-radius: 2px;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -143,7 +177,8 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      animation: fadeUp 0.8s ease both;
+      animation: fadeUp 0.8s var(--ease-out) both;
+      text-wrap: balance;
     }
 
     .hero-eyebrow::before {
@@ -153,13 +188,14 @@
       background: var(--gold);
     }
 
-    .hero-name {
+.hero-name {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2.8rem, 5vw, 4.2rem);
       color: var(--white);
-      line-height: 1.1;
+      line-height: 1.05;
       margin-bottom: 0.5rem;
-      animation: fadeUp 0.8s 0.1s ease both;
+      text-wrap: balance;
+      animation: fadeUp 0.8s 0.1s var(--ease-out) both;
     }
 
     .hero-name span {
@@ -174,7 +210,8 @@
       margin-bottom: 2rem;
       line-height: 1.6;
       max-width: 520px;
-      animation: fadeUp 0.8s 0.2s ease both;
+      animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+      max-width: 65ch;
     }
 
     .hero-badges {
@@ -182,7 +219,7 @@
       flex-wrap: wrap;
       gap: 0.6rem;
       margin-bottom: 2.5rem;
-      animation: fadeUp 0.8s 0.3s ease both;
+      animation: fadeUp 0.8s 0.3s var(--ease-out) both;
     }
 
     .badge {
@@ -194,13 +231,14 @@
       color: var(--gold-light);
       letter-spacing: 0.03em;
       background: rgba(201,168,76,0.07);
+      font-variant-numeric: tabular-nums;
     }
 
     .hero-contacts {
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
-      animation: fadeUp 0.8s 0.4s ease both;
+      animation: fadeUp 0.8s 0.4s var(--ease-out) both;
     }
 
     .contact-item {
@@ -215,6 +253,11 @@
     }
 
     .contact-item:hover { color: var(--gold-light); }
+    .contact-item:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
 
     .contact-icon {
       width: 32px; height: 32px;
@@ -234,7 +277,7 @@
       flex-direction: column;
       align-items: center;
       gap: 1.2rem;
-      animation: fadeUp 0.8s 0.2s ease both;
+      animation: fadeUp 0.8s 0.2s var(--ease-out) both;
     }
 
     .photo-frame {
@@ -280,6 +323,7 @@
 
     .photo-upload-btn {
       padding: 0.5rem 1.2rem;
+      min-height: 44px;
       background: transparent;
       border: 1px solid rgba(201,168,76,0.4);
       border-radius: 8px;
@@ -287,15 +331,24 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 0.8rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: transform 160ms var(--ease-out), background 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
+    .photo-upload-btn:active {
+      transform: scale(0.97);
+    }
+
     .photo-upload-btn:hover {
       background: rgba(201,168,76,0.1);
       border-color: var(--gold);
+    }
+
+    .photo-upload-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
     #photo-input { display: none; }
@@ -317,7 +370,7 @@
       box-shadow: var(--shadow);
       margin-bottom: 5rem;
       border: 1px solid rgba(201,168,76,0.12);
-      animation: fadeUp 0.7s ease both;
+      animation: fadeUp 0.7s var(--ease-out) both;
     }
 
     .section-label {
@@ -352,7 +405,7 @@
       line-height: 1.8;
       font-size: 1rem;
       font-weight: 300;
-      max-width: 820px;
+      max-width: 65ch;
     }
 
     /* ── PORTFOLIO SECTIONS ── */
@@ -383,11 +436,6 @@
       flex-shrink: 0;
     }
 
-    .icon-ml { background: linear-gradient(135deg, #e8f4fd, #bee3f8); }
-    .icon-projects { background: linear-gradient(135deg, #f0fff4, #c6f6d5); }
-    .icon-sql { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
-    .icon-bi { background: linear-gradient(135deg, #faf5ff, #e9d8fd); }
-
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -400,10 +448,14 @@
       padding: 1.75rem;
       box-shadow: var(--shadow);
       border: 1px solid rgba(0,0,0,0.05);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      transition: transform 160ms var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+    }
+
+    .card:active {
+      transform: scale(0.98);
     }
 
     .card::before {
@@ -414,7 +466,7 @@
       background: linear-gradient(90deg, var(--gold), var(--gold-light));
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s var(--ease-out);
     }
 
     .card:hover {
@@ -423,7 +475,9 @@
       border-color: rgba(201,168,76,0.2);
     }
 
-    .card:hover::before { transform: scaleX(1); }
+    .card:hover::before {
+      transform: scaleX(1);
+    }
 
     .card-type {
       font-size: 0.7rem;
@@ -448,6 +502,7 @@
       line-height: 1.65;
       font-weight: 300;
       margin-bottom: 1.25rem;
+      max-width: 65ch;
     }
 
     .card-tags {
@@ -464,6 +519,7 @@
       font-weight: 500;
       color: var(--navy);
       border: 1px solid rgba(0,0,0,0.07);
+      font-variant-numeric: tabular-nums;
     }
 
     .card-link {
@@ -476,10 +532,14 @@
       color: var(--gold);
       text-decoration: none;
       letter-spacing: 0.02em;
-      transition: gap 0.2s;
+      transition: gap 0.2s var(--ease-out), color 0.2s var(--ease-out);
     }
-
-    .card-link:hover { gap: 0.55rem; }
+    .card-link:hover { gap: 0.65rem; color: var(--gold-light); }
+    .card-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
 
     /* Add Project placeholder card */
     .card-add {
@@ -492,7 +552,7 @@
       gap: 0.5rem;
       min-height: 180px;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
     }
 
     .card-add:hover {
@@ -521,48 +581,24 @@
       font-weight: 400;
     }
 
-    /* ── COURSES SECTION ── */
-    .courses-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-
-    .course-item {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .course-item:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .course-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    .course-name {
-      font-size: 0.92rem;
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      z-index: 200;
+      padding: 0.5rem 1rem;
+      background: var(--navy);
+      color: var(--gold-light);
+      font-size: 0.85rem;
       font-weight: 500;
-      color: var(--navy);
-      margin-bottom: 0.2rem;
+      border-radius: 0 0 8px 8px;
+      text-decoration: none;
+      transition: top 0.2s var(--ease-out);
     }
-
-    .course-provider {
-      font-size: 0.78rem;
-      color: var(--text-muted);
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--gold);
     }
 
     /* ── FOOTER ── */
@@ -604,15 +640,16 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">CNN</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#ml-courses">Courses</a></li>
-    <li><a href="#ml-projects">ML Projects</a></li>
+    <li><a href="#ml-projects">Projects</a></li>
     <li><a href="#sql-projects">SQL</a></li>
-    <li><a href="#bi-projects">Power BI & Excel</a></li>
+    <li><a href="#bi-projects">Power BI</a></li>
   </ul>
 </nav>
 
@@ -620,18 +657,18 @@
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-content">
-      <div class="hero-eyebrow">Data Scientist & Business Analyst</div>
+      <div class="hero-eyebrow">Data Scientist & Machine Learning Engineer</div>
       <h1 class="hero-name">Cyrus<br>Ndung'u</h1>
       <p class="hero-tagline">
-        Turning complex data into decisions that matter — across credit risk, financial analytics, machine learning, and business intelligence.
+        Building predictive models, designing dashboards, and extracting insights from data. Electrical engineering foundation meets machine learning practice.
       </p>
       <div class="hero-badges">
         <span class="badge">Python · Scikit-learn</span>
         <span class="badge">Advanced SQL</span>
         <span class="badge">Power BI</span>
-        <span class="badge">Credit Analytics</span>
-        <span class="badge">MSc Business Analytics</span>
-        <span class="badge">KCB · 3+ Years</span>
+        <span class="badge">Machine Learning</span>
+        <span class="badge">BSc Elec. Eng. (Aug 2026)</span>
+        <span class="badge">Data Science Cert. (2026)</span>
       </div>
       <div class="hero-contacts">
         <a href="mailto:cyrazndungu@gmail.com" class="contact-item">
@@ -671,334 +708,165 @@
 </section>
 
 <!-- MAIN -->
-<main>
+<main id="main-content">
 
   <!-- ABOUT -->
   <section class="about-section" id="about">
-    <div class="section-label">About Me</div>
-    <h2 class="section-title">Analytical by nature,<br>data-driven by practice.</h2>
+    <div class="section-label">About</div>
+    <h2 class="section-title">Data Science meets<br>engineering thinking.</h2>
     <div class="divider"></div>
     <p class="about-text">
-      I'm a Data Scientist and Business Analyst based in Nairobi, Kenya, with over three years of progressive experience at Kenya Commercial Bank (KCB). 
-      My work spans credit risk analysis, financial forecasting, KPI reporting, and machine learning model development. 
-      I hold a <strong>Bachelor of Commerce in Accounting & Finance</strong> from Dedan Kimathi University of Technology and am currently 
-      pursuing an <strong>MSc in Business Analytics</strong>. I'm proficient in Python, SQL, Power BI, and the Scikit-learn ML stack — 
-      and I'm passionate about using data to drive decisions that are both commercially sound and socially meaningful.
+      I'm a Data Scientist and Electrical Engineering student based in Nairobi, Kenya, graduating in August 2026 with a
+      <strong>BSc in Electrical &amp; Electronics Engineering</strong> from Murang'a University of Technology. I recently completed a 
+      <strong>Data Science &amp; Analytics certification</strong> at LuxDevHQ Data School (June 2026), where I built end-to-end ML projects 
+      spanning health, finance, and customer analytics.
+    </p>
+    <p class="about-text" style="margin-top: 1rem;">
+      I work across Python, SQL, Power BI, FastAPI, and the Scikit-learn stack — building predictive models, designing dashboards, 
+      and extracting actionable insights from data. My engineering background gives me a systematic approach to problem-solving: 
+      break the problem down, build iteratively, and validate rigorously.
     </p>
   </section>
 
-
--->
-
-  <section class="about-section" id="experience" style="margin-bottom: 2rem;">
-    <div class="section-label">Background</div>
-    <h2 class="section-title">Experience &amp; Education</h2>
-    <div class="divider"></div>
-
-    <!-- EXPERIENCE -->
-    <div style="margin-bottom: 2.5rem;">
-      <p style="font-size:0.75rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem;">Work Experience</p>
-
-      <!-- KCB Bank Officer -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">Bank Officer</span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">Oct 2024 – Present</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:0.5rem;">Kenya Commercial Bank (KCB) · Retail Banking Division</p>
-      <ul style="margin:0 0 1.5rem 1.2rem; padding:0; color:#6b7a8d; font-size:0.88rem; line-height:1.85; font-weight:300;">
-        <li>Monitored and managed credit portfolio health — tracking NPLs, overdrawn accounts, and liquidation accounts, and generating reconciliation reports and credit returns within defined turnaround times</li>
-        <li>Analysed force pay reports and loan callback data to identify credit risks, recommending actions and escalating findings to line management</li>
-        <li>Processed and reconciled branch transactions and account operative tools, ensuring data accuracy and integrity across teller and customer service operations</li>
-        <li>Reviewed agent and merchant compliance against bank and regulatory requirements, maintaining accurate channel performance records</li>
-        <li>Applied AML and KYC procedures during daily operations — screening transactions, resolving flagged customer instructions, and escalating suspicious activity as required</li>
-        <li>Implemented service improvement initiatives at branch level and provided structured feedback to management based on operational data</li>
-      </ul>
-
-      <!-- KCB Bank Officer Trainee -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">Bank Officer Trainee</span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">Oct 2023 – Oct 2024</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:0.5rem;">Kenya Commercial Bank (KCB) · Retail Banking Division</p>
-      <ul style="margin:0 0 1.5rem 1.2rem; padding:0; color:#6b7a8d; font-size:0.88rem; line-height:1.85; font-weight:300;">
-        <li>Received, processed, and reconciled cash instruments and customer transactions within required TATs, maintaining accurate teller and account records</li>
-        <li>Processed customer requests including account openings, balance certificates, and correspondence — capturing and resolving feedback via eCRM within defined turnaround times</li>
-        <li>Reviewed wallet share data to identify cross-sell opportunities, engaging customers and contributing to branch revenue collection targets</li>
-        <li>Coordinated banking hall activities and supported implementation of service improvement initiatives under the guidance of the Branch Manager</li>
-        <li>Adhered to AML, KYC, and Business Continuity procedures in all daily operations, contributing to risk mitigation and regulatory compliance</li>
-      </ul>
-
-      <!-- KCB Sales -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">Retail Direct Sales Representative</span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">Mar 2022 – Oct 2023</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:0.5rem;">Kenya Commercial Bank (KCB)</p>
-      <ul style="margin:0 0 1.5rem 1.2rem; padding:0; color:#6b7a8d; font-size:0.88rem; line-height:1.85; font-weight:300;">
-        <li>Delivered sales targets across Retail, Agri, SAHL, Agent Banking, and Bancassurance product lines, preparing regular performance reports and trend analyses for business planning</li>
-        <li>Collected and synthesised customer feedback data to evaluate product performance and support campaign targeting decisions</li>
-      </ul>
-
-      <!-- Graduate Assistant -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">Graduate Assistant – Research &amp; Data Analysis</span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">Jun 2019 – Dec 2021</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:0.5rem;">Dedan Kimathi University of Technology</p>
-      <ul style="margin:0 0 0 1.2rem; padding:0; color:#6b7a8d; font-size:0.88rem; line-height:1.85; font-weight:300;">
-        <li>Assisted lecturers in preparing teaching materials and facilitated tutorials and discussion groups for ~500 students across business and finance programmes</li>
-        <li>Supported student research projects — data collection, quantitative analysis, and academic report preparation</li>
-        <li>Tutored Financial Management, Quantitative Methods, Financial Statement Analysis, Taxation, and Company Law</li>
-      </ul>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- EDUCATION -->
-    <div style="margin-top:1.8rem;">
-      <p style="font-size:0.75rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem;">Education</p>
-
-      <!-- MSc -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">MSc Business Analytics <span style="font-size:0.78rem; background:#fef3c7; color:#92400e; padding:0.2rem 0.6rem; border-radius:100px; font-weight:600; margin-left:0.4rem;">In Progress</span></span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">2019 – Present</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:1.4rem;">Dedan Kimathi University of Technology</p>
-
-      <!-- BCom -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">Bachelor of Commerce – Accounting &amp; Finance</span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">2015 – 2018</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:1.4rem;">Dedan Kimathi University of Technology</p>
-
-      <!-- CPA -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.3rem; flex-wrap:wrap; gap:0.3rem;">
-        <span style="font-weight:600; color:#0d1b2a; font-size:1rem;">CPA Part I</span>
-        <span style="font-size:0.82rem; color:#6b7a8d; font-style:italic;">2016 – 2017</span>
-      </div>
-      <p style="font-size:0.88rem; font-weight:600; color:#c9a84c; margin-bottom:0;">KASNEB</p>
-    </div>
-  </section>
-
   <!-- ML PROJECTS -->
-  <section class="portfolio-block" id="ml-courses">
+  <section class="portfolio-block" id="ml-projects">
     <div class="block-header">
-      <div class="section-label">Learning & Development</div>
+      <div class="section-label">Portfolio</div>
       <h2 class="block-title">
-        <span class="block-icon icon-ml">🎓</span>
-        Machine Learning Projects
+        Machine Learning & Data Science
       </h2>
     </div>
     <div class="cards-grid">
 
       <!-- 1 -->
       <div class="card">
-        <div class="card-type">1 · Regression · Supervised Learning</div>
-        <div class="card-title">Linear Regression Basics</div>
+        <div class="card-type">Classification · Healthcare · FastAPI</div>
+        <div class="card-title">Child Malnutrition Risk Prediction</div>
         <div class="card-desc">
-          Implements Simple Linear Regression using Python and Scikit-learn. Covers data exploration, EDA, train-test split, model training, and evaluation using MSE and R² Score. Predicts house prices from a continuous variable.
+          End-to-end ML system predicting child stunting using KDHS data. Random Forest classifier with SMOTETomek handling severe class imbalance. Features FastAPI backend with interactive frontend for real-world deployment.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span>
+          <span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">SMOTE</span><span class="tag">FastAPI</span><span class="tag">Scikit-learn</span>
         </div>
-        <a href="https://github.com/Bryankamanda/1-Linear-regresion-prac" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/ChildMalnutritionPrediction" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 2 -->
       <div class="card">
-        <div class="card-type">2 · Regression · Multiple Features</div>
-        <div class="card-title">Multivariate Linear Regression</div>
+        <div class="card-type">Regression · Feature Engineering · FastAPI</div>
+        <div class="card-title">Japanese Car Price Prediction</div>
         <div class="card-desc">
-          Extends simple regression by incorporating multiple predictors. Demonstrates how different features collectively influence a target variable, with applications in financial forecasting and customer behaviour analysis.
+          Gradient Boosting model achieving R²=0.76 using 40+ engineered features from ~300K car listings. Includes web scraper, FastAPI interface, and deployment-ready pipeline.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span><span class="tag">NumPy</span>
+          <span class="tag">Python</span><span class="tag">Gradient Boosting</span><span class="tag">FastAPI</span><span class="tag">Web Scraping</span><span class="tag">R²=0.76</span>
         </div>
-        <a href="https://github.com/Bryankamanda/2-Multivariate-Regression" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/Japan_car_price_prediction_project" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 3 -->
       <div class="card">
-        <div class="card-type">3 · Feature Engineering · Encoding</div>
-        <div class="card-title">Dummy Variables & One-Hot Encoding</div>
+        <div class="card-type">Regression · XGBoost · Dashboard</div>
+        <div class="card-title">Developer Salary Prediction</div>
         <div class="card-desc">
-          Demonstrates how to handle categorical variables using dummy variables and one-hot encoding — essential preprocessing techniques for ML models. Covers the distinction between encoding strategies and the dummy variable trap.
+          XGBoost model with log-transform and RandomizedSearchCV hyperparameter tuning. Predicts developer salaries from survey data with a FastAPI dashboard frontend.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Feature Engineering</span>
+          <span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">RandomizedSearchCV</span><span class="tag">FastAPI</span><span class="tag">Dashboard</span>
         </div>
-        <a href="https://github.com/Bryankamanda/3-Dummy-variables-and-one-hot-encoding" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/dev_salary_prediction_project" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 4 -->
       <div class="card">
-        <div class="card-type">4 · ML Pipeline · Data Splitting</div>
-        <div class="card-title">Train-Test Split for Machine Learning</div>
+        <div class="card-type">Classification · Full-Stack · PostgreSQL</div>
+        <div class="card-title">Titanic Survival Prediction</div>
         <div class="card-desc">
-          A practical guide to correctly dividing datasets into training and testing sets. Covers data leakage prevention, reproducibility via random state, and split ratios — using car price data as a real-world example.
+          Full-stack ML pipeline: FastAPI backend, PostgreSQL persistence, scheduler automation, and a custom HTML/CSS frontend. Predicts passenger survival from passenger features.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span>
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Full-Stack</span><span class="tag">Scheduler</span>
         </div>
-        <a href="https://github.com/Bryankamanda/4-How-to-Split-train-and-test-data-for-ML" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/titanic_survival_prediction" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 5 -->
       <div class="card">
-        <div class="card-type">5 · Classification · Binary</div>
-        <div class="card-title">Logistic Regression – Binary Classification</div>
+        <div class="card-type">Multi-Class · Healthcare · Supabase</div>
+        <div class="card-title">Healthcare Test Result Classification</div>
         <div class="card-desc">
-          Implements Logistic Regression for binary classification using insurance data. Covers the sigmoid function, decision boundary, probability-based prediction, and model evaluation with accuracy and confusion matrix.
+          Multi-class classification predicting Normal/Abnormal/Inconclusive test results. FastAPI + Supabase backend with PostgreSQL database and deployed pipeline.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Classification</span>
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Multi-Class</span>
         </div>
-        <a href="https://github.com/Bryankamanda/5-Logistic-Regression" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/healthcare_ml_project" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 6 -->
       <div class="card">
-        <div class="card-type">6 · Classification · Multiclass</div>
-        <div class="card-title">Logistic Regression – Multiclass (Digits)</div>
+        <div class="card-type">Classification · SMOTE · Multi-Level</div>
+        <div class="card-title">Heart Disease Severity Classification</div>
         <div class="card-desc">
-          Extends Logistic Regression to classify handwritten digits (0–9) using Scikit-learn's digits dataset (1,797 samples, 64 pixel features). Applies One-vs-Rest strategy and evaluates accuracy and confusion matrix.
+          Multi-class heart disease classifier predicting 5 severity levels (0–4). Uses SMOTE for imbalance handling, comprehensive EDA, and model comparison across algorithms.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">OvR</span><span class="tag">NumPy</span>
+          <span class="tag">Python</span><span class="tag">SMOTE</span><span class="tag">Multi-Class</span><span class="tag">Scikit-learn</span><span class="tag">EDA</span>
         </div>
-        <a href="https://github.com/Bryankamanda/6-Logistic-Regression-Multiclass-Classification-" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/Heart_disease_prediction" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 7 -->
       <div class="card">
-        <div class="card-type">7 · Classification · Tree-Based</div>
-        <div class="card-title">Decision Tree – Salary Prediction</div>
+        <div class="card-type">Unsupervised · Clustering · Segmentation</div>
+        <div class="card-title">Mall Customer Segmentation</div>
         <div class="card-desc">
-          Applies a Decision Tree Classifier to predict whether an employee earns above $100K based on company, job role, and degree. Demonstrates categorical encoding, interpretable rule-based logic, and HR data analysis.
+          K-Means and Hierarchical clustering on mall customer data. Uses Elbow Method and Silhouette scores to determine optimal clusters. Segments customers by spending behaviour and demographics.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Decision Tree</span><span class="tag">Scikit-learn</span>
+          <span class="tag">Python</span><span class="tag">K-Means</span><span class="tag">Hierarchical</span><span class="tag">Silhouette</span><span class="tag">Scikit-learn</span>
         </div>
-        <a href="https://github.com/Bryankamanda/7-Decision-Tree" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/mall_customer_segmentation" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 8 -->
       <div class="card">
-        <div class="card-type">8 · Classification · Margin-Based</div>
-        <div class="card-title">Support Vector Machine (SVM) – Iris Classification</div>
+        <div class="card-type">RFM · CLV · Forecasting</div>
+        <div class="card-title">E-Commerce Customer Behaviour & CLV</div>
         <div class="card-desc">
-          Implements SVM to classify Iris flowers into 3 species (Setosa, Versicolor, Virginica). Covers hyperplane optimisation, One-vs-Rest multiclass strategy, kernel concepts, and model evaluation on the Iris dataset.
+          RFM analysis, Customer Lifetime Value prediction, GMV forecasting, and Pareto analysis on 100K+ Olist transactions. Identifies high-value segments and churn patterns.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">SVM</span><span class="tag">Scikit-learn</span><span class="tag">Kernel</span>
+          <span class="tag">Python</span><span class="tag">RFM</span><span class="tag">CLV</span><span class="tag">Pareto</span><span class="tag">Forecasting</span><span class="tag">Pandas</span>
         </div>
-        <a href="https://github.com/Bryankamanda/8-Support-Vector-Machine-SVM-" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/E_Commerce_Customer_Behavior_Analysis" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 9 -->
       <div class="card">
-        <div class="card-type">9 · Ensemble Learning · Classification</div>
-        <div class="card-title">Random Forest – Handwritten Digit Recognition</div>
+        <div class="card-type">EDA · Health · Nutrition</div>
+        <div class="card-title">Food Price & Nutrition Analysis</div>
         <div class="card-desc">
-          Uses a Random Forest Classifier on the Digits dataset. Demonstrates bootstrap sampling, majority voting, variance reduction over single trees, and feature importance extraction.
+          Exploratory analysis of food prices and nutritional content. Data cleaning, visualisation, and trend identification across food categories and markets.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">Scikit-learn</span><span class="tag">Bagging</span>
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">EDA</span><span class="tag">Visualisation</span><span class="tag">Nutrition</span>
         </div>
-        <a href="https://github.com/Bryankamanda/9-Random-Forest" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/food_price_analysis" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <!-- 10 -->
       <div class="card">
-        <div class="card-type">10 · Model Validation · Cross-Validation</div>
-        <div class="card-title">K-Fold Cross Validation – Digits Classification</div>
+        <div class="card-type">EDA · Sports · Statistics</div>
+        <div class="card-title">Ultra-Marathon Runners Analysis</div>
         <div class="card-desc">
-          Demonstrates K-Fold Cross Validation to provide a robust model performance estimate beyond a single train-test split. Shows how average accuracy across folds reduces variance and detects overfitting.
+          Statistical analysis of ultra-marathon runner performance. Explores distance, pace, age, and gender trends across race categories with rich visualisations.
         </div>
         <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">K-Fold</span><span class="tag">Scikit-learn</span><span class="tag">Validation</span>
+          <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Sports Analytics</span><span class="tag">Visualisation</span><span class="tag">Statistics</span>
         </div>
-        <a href="https://github.com/Bryankamanda/10-K-Fold-Cross-Validation" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/Ultra-marathon-runners-analysis" target="_blank" class="card-link">View on GitHub →</a>
       </div>
-
-      <!-- 11 -->
-      <div class="card">
-        <div class="card-type">11 · Unsupervised Learning · Clustering</div>
-        <div class="card-title">K-Means Clustering – Customer Segmentation</div>
-        <div class="card-desc">
-          Applies K-Means Clustering to group individuals by age and income. Uses the Elbow Method to determine optimal K and visualises segments — demonstrating real-world customer profiling and market segmentation.
-        </div>
-        <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">K-Means</span><span class="tag">Scikit-learn</span><span class="tag">Matplotlib</span>
-        </div>
-        <a href="https://github.com/Bryankamanda/11-K-Means-Clustering-Algorithm" target="_blank" class="card-link">View on GitHub →</a>
-      </div>
-
-      <!-- 12 -->
-      <div class="card">
-        <div class="card-type">12 · Probabilistic · NLP</div>
-        <div class="card-title">Naïve Bayes – Titanic Survival & Spam Detection</div>
-        <div class="card-desc">
-          Implements Naïve Bayes on two problems: predicting Titanic survival from structured passenger data, and classifying email spam vs. ham using text vectorisation. Demonstrates probabilistic ML on both structured and unstructured data.
-        </div>
-        <div class="card-tags">
-          <span class="tag">Python</span><span class="tag">Naïve Bayes</span><span class="tag">NLP</span><span class="tag">Scikit-learn</span>
-        </div>
-        <a href="https://github.com/Bryankamanda/12-Naive-bayes-classifier" target="_blank" class="card-link">View on GitHub →</a>
-      </div>
-
-      <!-- 13 -->
-<div class="card">
-  <div class="card-type">13 · Model Optimisation · Hyperparameter Tuning</div>
-  <div class="card-title">Hyperparameter Tuning & Model Selection – Iris Classification</div>
-  <div class="card-desc">
-    Compares three model evaluation strategies — Train-Test Split, K-Fold Cross Validation, and GridSearchCV — on the Iris dataset (150 samples, 3 classes). SVM with RBF kernel achieved ~98% CV accuracy and was selected as the optimal model through exhaustive automated search, outperforming Logistic Regression and Decision Tree baselines.
-  </div>
-  <div class="card-tags">
-    <span class="tag">Python</span><span class="tag">GridSearchCV</span><span class="tag">SVM</span><span class="tag">K-Fold</span><span class="tag">Scikit-learn</span>
-  </div>
-  <a href="https://github.com/Bryankamanda/13-Hyper-parameter-Tuning-GridSearchCV-" target="_blank" class="card-link">View on GitHub →</a>
-</div>
-
-<!-- 14 -->
-<div class="card">
-  <div class="card-type">14 · Regression · Regularisation</div>
-  <div class="card-title">L1 & L2 Regularisation – Lasso & Ridge Regression</div>
-  <div class="card-desc">
-    Applies Lasso (L1) and Ridge (L2) regularisation to the Melbourne Housing Dataset to address overfitting in high-dimensional data. Covers data cleaning, one-hot encoding, correlation analysis, and model comparison — demonstrating how regularisation improves generalisation over a standard linear regression baseline.
-  </div>
-  <div class="card-tags">
-    <span class="tag">Python</span><span class="tag">Lasso</span><span class="tag">Ridge</span><span class="tag">Scikit-learn</span><span class="tag">Seaborn</span>
-  </div>
-  <a href="https://github.com/Bryankamanda/14-L1-and-L2-Regularization-Lasso-Ridge-Regression" target="_blank" class="card-link">View on GitHub →</a>
-</div>
-
-<!-- 15 -->
-<div class="card">
-  <div class="card-type">15 · Classification · Instance-Based Learning</div>
-  <div class="card-title">K-Nearest Neighbors (KNN) – Iris Classification</div>
-  <div class="card-desc">
-    Implements KNN classification on the Iris dataset using distance-based majority voting. Covers feature scaling, optimal K selection, and model evaluation with accuracy score and confusion matrix — highlighting the trade-off between small K (noise-sensitive) and large K (underfitting).
-  </div>
-  <div class="card-tags">
-    <span class="tag">Python</span><span class="tag">KNN</span><span class="tag">Scikit-learn</span><span class="tag">Feature Scaling</span><span class="tag">Matplotlib</span>
-  </div>
-  <a href="https://github.com/Bryankamanda/15-K-nearest-neighbors-classification" target="_blank" class="card-link">View on GitHub →</a>
-</div>
-
-<!-- 16 -->
-<div class="card">
-  <div class="card-type">16 · Dimensionality Reduction · Unsupervised</div>
-  <div class="card-title">Principal Component Analysis (PCA) – Digits Dataset</div>
-  <div class="card-desc">
-    Applies PCA to the Digits dataset (64 features, 10 classes) across three scenarios: full 64 components (97.22% accuracy), 95% variance retained (96.95%), and 2 components (60.80%). Demonstrates that retaining 95% variance preserves nearly all predictive power while significantly reducing dimensionality.
-  </div>
-  <div class="card-tags">
-    <span class="tag">Python</span><span class="tag">PCA</span><span class="tag">Scikit-learn</span><span class="tag">Dimensionality Reduction</span><span class="tag">NumPy</span>
-  </div>
-  <a href="https://github.com/Bryankamanda/16-Principal-Component-Analysis-PCA-" target="_blank" class="card-link">View on GitHub →</a>
-</div>
 
     </div>
   </section>
@@ -1008,50 +876,32 @@
     <div class="block-header">
       <div class="section-label">Portfolio</div>
       <h2 class="block-title">
-        <span class="block-icon icon-sql">🗄</span>
-        SQL Projects
+        SQL & Databases
       </h2>
     </div>
     <div class="cards-grid">
       <div class="card">
-        <div class="card-type">Advanced SQL · Banking</div>
-        <div class="card-title">Credit Portfolio Performance Dashboard (SQL Layer)</div>
+        <div class="card-type">PostgreSQL · Schema Design · CRUD</div>
+        <div class="card-title">Customer, Products & Sales Database</div>
         <div class="card-desc">
-          Designed complex multi-table SQL queries using CTEs and window functions to extract NPL trends, overdrawn account patterns, and loan liquidation metrics from a relational banking database.
+          Full PostgreSQL schema for a retail business: Customers, Products, Sales, and Inventory tables with foreign key constraints. 23KB SQL file with 30+ customer records, aggregate queries (COUNT, AVG, SUM), and complex joins.
         </div>
         <div class="card-tags">
-          <span class="tag">SQL</span><span class="tag">CTEs</span><span class="tag">Window Functions</span><span class="tag">Joins</span>
+          <span class="tag">PostgreSQL</span><span class="tag">Schema Design</span><span class="tag">Foreign Keys</span><span class="tag">Aggregation</span><span class="tag">Joins</span>
         </div>
-        <a href="https://github.com/BryanKamanda" target="_blank" class="card-link">View on GitHub →</a>
+        <a href="https://github.com/Cyrusz55/transaction_analysis" target="_blank" class="card-link">View on GitHub →</a>
       </div>
 
       <div class="card">
-        <div class="card-type">Data Analysis · Reporting</div>
-        <div class="card-title">Agent Banking Channel Analytics</div>
+        <div class="card-type">PostgreSQL · Bookstore · DBeaver</div>
+        <div class="card-title">Bookstore Order Management System</div>
         <div class="card-desc">
-          Wrote parameterised SQL queries to analyse transaction volumes, revenue collection, and agent performance across multiple banking channels, feeding downstream Power BI dashboards.
+          PostgreSQL practice in DBeaver: customers, books, and orders schema with SERIAL primary keys, NUMERIC pricing, REFERENCES constraints, and Kenyan-named sample data (Otieno, Okello, Kimani).
         </div>
         <div class="card-tags">
-          <span class="tag">SQL</span><span class="tag">Sub-queries</span><span class="tag">Aggregation</span><span class="tag">Reporting</span>
+          <span class="tag">PostgreSQL</span><span class="tag">DBeaver</span><span class="tag">SQL Scripts</span><span class="tag">Schema</span><span class="tag">Constraints</span>
         </div>
-        <a href="https://github.com/BryanKamanda" target="_blank" class="card-link">View on GitHub →</a>
-      </div>
-
-      <div class="card">
-        <div class="card-type">Data Quality · ETL</div>
-        <div class="card-title">Data Validation & Reconciliation Scripts</div>
-        <div class="card-desc">
-          Built a suite of SQL scripts to automate data quality checks — detecting duplicates, mismatched records, and null values — used for pre-submission regulatory report validation.
-        </div>
-        <div class="card-tags">
-          <span class="tag">SQL</span><span class="tag">Data QA</span><span class="tag">Reconciliation</span><span class="tag">Automation</span>
-        </div>
-        <a href="https://github.com/BryanKamanda" target="_blank" class="card-link">View on GitHub →</a>
-      </div>
-
-      <div class="card card-add" onclick="window.open('https://github.com/BryanKamanda','_blank')">
-        <div class="add-icon">+</div>
-        <span>Add SQL Project</span>
+        <a href="https://github.com/Cyrusz55/SQL-project" target="_blank" class="card-link">View on GitHub →</a>
       </div>
     </div>
   </section>
@@ -1061,30 +911,57 @@
     <div class="block-header">
       <div class="section-label">Portfolio</div>
       <h2 class="block-title">
-        <span class="block-icon icon-bi">📊</span>
-        Power BI & Excel Projects
-        </h2>
-      <div class="card">
-  <div class="card-type">Power BI · HR Analytics · People Management</div>
-  <div class="card-title">HR Analytics Dashboard – Full Workforce Insights</div>
-  <div class="card-desc">
-    An interactive Power BI dashboard delivering end-to-end HR analytics across 1,470 employees.
-    Tracks gender distribution (60% male / 40% female), promotion eligibility (5% due),
-    retrenchment status (117 flagged), job level headcount, years of service distribution,
-    and employee distance from work — all filterable by Department and Education Field.
-  </div>
-  <div class="card-tags">
-    <span class="tag">Power BI</span>
-    <span class="tag">DAX</span>
-    <span class="tag">HR Analytics</span>
-    <span class="tag">Data Modelling</span>
-    <span class="tag">KPI Cards</span>
-    <span class="tag">Slicers</span>
-</div>
-<a href="https://github.com/Bryankamanda/HR-Dashboard-using-POWER-BI" target="_blank" class="card-link">View on GitHub →</a>
-</div>  <!-- closes card (the parent container) -->
+        Power BI & Excel
+      </h2>
+    </div>
+    <div class="cards-grid">
 
-</div>  <!-- closes cards-grid -->
+      <div class="card">
+        <div class="card-type">Power BI · Startups · Kenya</div>
+        <div class="card-title">Kenyan Startups Analysis Dashboard</div>
+        <div class="card-desc">
+          Interactive Power BI dashboard analysing 179 Kenyan startups with $2.21B cumulative funding across 72 industries. Features top-10 concentration analysis, sector breakdown (agri, fintech, energy), and funding trend visualisations.
+        </div>
+        <div class="card-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Startup Analytics</span>
+          <span class="tag">Funding Analysis</span>
+        </div>
+        <a href="https://github.com/Cyrusz55/kenyan_startups_analysis" target="_blank" class="card-link">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-type">Power BI · Dashboard</div>
+        <div class="card-title">March Power BI Dashboard</div>
+        <div class="card-desc">
+          A comprehensive Power BI dashboard built for monthly performance tracking. Features KPI cards, trend analysis, and interactive filters.
+        </div>
+        <div class="card-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Dashboard</span>
+          <span class="tag">KPIs</span>
+          <span class="tag">Monthly Reporting</span>
+        </div>
+        <a href="https://github.com/Cyrusz55/March_PowerBI_dashboard" target="_blank" class="card-link">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-type">Power BI · Healthcare</div>
+        <div class="card-title">Medical Data Dashboard</div>
+        <div class="card-desc">
+          Power BI dashboard built on medical/healthcare data. Features interactive visualisations for health metrics analysis and patient data exploration.
+        </div>
+        <div class="card-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">Visualisation</span>
+          <span class="tag">Data Analysis</span>
+        </div>
+        <a href="https://github.com/Cyrusz55/powerBI-assignment" target="_blank" class="card-link">View on GitHub →</a>
+      </div>
+
+    </div>  <!-- closes cards-grid -->
 </section>  <!-- closes bi-projects section -->
 
 </main>  <!-- closes main -->
@@ -1128,7 +1005,7 @@
   document.querySelectorAll('.portfolio-block, .about-section').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(28px)';
-    el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+    el.style.transition = 'opacity 0.65s cubic-bezier(0.23, 1, 0.32, 1), transform 0.65s cubic-bezier(0.23, 1, 0.32, 1)';
     observer.observe(el);
   });
 </script>

@@ -321,6 +321,18 @@
       .proj-visual             { height: 120px; font-size: 2.6rem; margin-top: 20px; }
       #contact .contact-wrap   { grid-template-columns: 1fr; }
     }
+
+    /* project media: cover gif and light/dark result captures */
+    .proj-media { margin: 0 0 20px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.25); }
+    .proj-media img { display: block; width: 100%; height: auto; }
+    .proj-media-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0 0 20px; }
+    .proj-media-pair figure { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.25); }
+    .proj-media-pair img { display: block; width: 100%; height: auto; }
+    .proj-media-pair figcaption { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); padding: 8px 10px; }
+
+    @media (max-width: 580px) {
+      .proj-media-pair { grid-template-columns: 1fr; }
+    }
     @media (max-width: 580px) {
       #skills .skills-grid { grid-template-columns: 1fr; }
       .about-stats         { grid-template-columns: 1fr 1fr; }
@@ -409,7 +421,7 @@
         <p>Whether it's forecasting grid load 168 hours ahead, predicting child malnutrition risk from survey data, or segmenting e-commerce customers by lifetime value, I care about models that hold up outside the notebook.</p>
         <div class="about-stats">
           <div class="stat-card reveal">
-            <div class="stat-num g">11</div>
+            <div class="stat-num g">12</div>
             <div class="stat-lbl">ML &amp; Data Science Projects</div>
           </div>
           <div class="stat-card reveal">
@@ -601,7 +613,7 @@
       <div class="subgroup-head reveal">
         <span class="subgroup-title">Machine Learning &amp; Data Science</span>
         <span class="subgroup-line"></span>
-        <span class="subgroup-count">12 projects</span>
+        <span class="subgroup-count">13 projects</span>
       </div>
       <div class="projects-grid">
 
@@ -800,7 +812,32 @@
             <span class="tag green">Sports Analytics</span>
           </div>
           <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/Ultra-marathon-runners-analysis" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
+            <a href="https://github.com/Cyrusz55/Ultra-marathon-runners-analysis" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="glass proj-card reveal">
+          <div class="proj-num">13</div>
+          <div class="proj-name">Type 2 Diabetes Risk Estimator</div>
+          <div class="proj-desc">Estimates the type 2 diabetes class from nine numeric health measurements. An XGBoost pipeline handles median imputation, standardisation, and SMOTETomek resampling, and runs behind a FastAPI service with a light and dark single page form. The saved pipeline is pinned to Hugging Face revision <code>v1</code>, and every push to master runs lint, tests, and a Docker build before the image ships to GHCR and Render with a live smoke test.</div>
+          <div class="proj-tags">
+            <span class="tag">Python</span>
+            <span class="tag blue">FastAPI</span>
+            <span class="tag green">XGBoost</span>
+            <span class="tag rose">Docker</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag blue">GitHub Actions</span>
+            <span class="tag green">Hugging Face</span>
+            <span class="tag rose">Render</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://type-2-diabetes-prediction-project.onrender.com/" target="_blank" rel="noopener noreferrer" class="proj-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/Cyrusz55/TYPE_2_DIABETES_PREDICTION_PROJECT" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+            <a href="https://huggingface.co/cyrusnx/type2_diabetes_xgboost" target="_blank" rel="noopener noreferrer" class="proj-link">Hugging Face →</a>
           </div>
         </div>
 

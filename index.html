@@ -281,6 +281,17 @@
     .subgroup-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--glass-border), transparent); }
     .subgroup-count { font-size: 0.74rem; color: var(--text-3); white-space: nowrap; letter-spacing: 0.08em; text-transform: uppercase; }
 
+    /* ── OVERFLOW: the rest of the work, as compact links ── */
+    .overflow-block { margin-top: 46px; padding-top: 4px; }
+    .overflow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 9px; }
+    .ov-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 15px; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); text-decoration: none; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+    .ov-item:hover { background: rgba(167,139,250,0.09); border-color: rgba(167,139,250,0.24); transform: translateY(-2px); }
+    .ov-name { font-size: 0.845rem; color: var(--text-2); font-weight: 500; line-height: 1.4; }
+    .ov-item:hover .ov-name { color: var(--text-1); }
+    .ov-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-3); text-transform: uppercase; flex-shrink: 0; }
+    .overflow-all { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; font-size: 0.85rem; font-weight: 600; color: var(--accent-v); text-decoration: none; transition: gap 0.2s, opacity 0.2s; }
+    .overflow-all:hover { gap: 10px; opacity: 0.75; }
+
     /* ── CONTACT ── */
     #contact .contact-wrap { display: grid; grid-template-columns: 1fr 1.35fr; gap: 40px; align-items: start; }
     .c-info { padding: 34px; }
@@ -317,6 +328,7 @@
       #about .about-grid       { grid-template-columns: 1fr; }
       #skills .skills-grid     { grid-template-columns: 1fr 1fr; }
       .projects-grid           { grid-template-columns: 1fr; }
+      .overflow-grid           { grid-template-columns: 1fr; }
       .proj-card.featured      { grid-column: span 1; display: block; }
       .proj-visual             { height: 120px; font-size: 2.6rem; margin-top: 20px; }
       #contact .contact-wrap   { grid-template-columns: 1fr; }
@@ -466,6 +478,20 @@
         <div class="glass t-card">
           <div class="t-header">
             <div>
+              <div class="t-role">Data Science &amp; AI Intern</div>
+              <div class="t-company">Future Interns · Remote</div>
+            </div>
+            <span class="t-date">Nov 2026 — Dec 2026</span>
+          </div>
+          <p class="t-desc">Structured data science and AI internship working through applied project briefs — taking each one from raw data to a deployed, documented deliverable.</p>
+          <p class="t-desc">Hands-on work spans exploratory analysis, predictive modelling with scikit-learn, and serving finished models through FastAPI with CI-driven builds.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="glass t-card">
+          <div class="t-header">
+            <div>
               <div class="t-role">Data Science Trainee</div>
               <div class="t-company">LuxDevHQ Data School · Nairobi, KE</div>
             </div>
@@ -605,19 +631,11 @@
 <section id="projects">
   <div class="container">
     <p class="section-label reveal">What I've Built</p>
-    <h2 class="section-title reveal">Featured Projects</h2>
-    <p class="section-subtitle reveal">A selection spanning machine learning, databases, and business intelligence — drawn from 17 end-to-end builds.</p>
+    <h2 class="section-title reveal">Selected Projects</h2>
+    <p class="section-subtitle reveal">Eight builds chosen to show the full pipeline — modelling, deployment, and honest reporting of results. The rest of the work lives on GitHub.</p>
 
-    <!-- GROUP 1: ML & DATA SCIENCE -->
-    <div class="subgroup" id="ml-projects">
-      <div class="subgroup-head reveal">
-        <span class="subgroup-title">Machine Learning &amp; Data Science</span>
-        <span class="subgroup-line"></span>
-        <span class="subgroup-count">13 projects</span>
-      </div>
-      <div class="projects-grid">
+    <div class="projects-grid">
 
-        <!-- FEATURED: Grid forecasting -->
         <div class="glass proj-card featured reveal">
           <div>
             <div class="proj-num">01 — FEATURED PROJECT</div>
@@ -643,6 +661,7 @@
         </div>
 
         <!-- 02: PESA_LENS -->
+
         <div class="glass proj-card reveal">
           <div class="proj-num">02</div>
           <div class="proj-name">PESA_LENS — M-Pesa Statement Assessment</div>
@@ -664,6 +683,7 @@
 
 
         <!-- 03 -->
+
         <div class="glass proj-card reveal">
           <div class="proj-num">03</div>
           <div class="proj-name">Travel Africa RAG Assistant</div>
@@ -679,6 +699,7 @@
         </div>
 
         <!-- 03 -->
+
         <div class="glass proj-card reveal">
           <div class="proj-num">04</div>
           <div class="proj-name">Child Malnutrition Risk Prediction</div>
@@ -690,135 +711,14 @@
             <span class="tag rose">FastAPI</span>
           </div>
           <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/Child-Malnutrition-Risk-Prediction" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
+            <a href="https://github.com/Cyrusz55/ChildMalnutritionPrediction" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
           </div>
         </div>
 
         <!-- 04 -->
+
         <div class="glass proj-card reveal">
           <div class="proj-num">05</div>
-          <div class="proj-name">Japanese Car Price Prediction</div>
-          <div class="proj-desc">Gradient Boosting model achieving R²=0.76 using 40+ engineered features from ~300K car listings. Includes a web scraper, FastAPI interface, and a deployment-ready pipeline.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">Gradient Boosting</span>
-            <span class="tag green">Web Scraping</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/Japan_car_price_prediction_project" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 05 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">06</div>
-          <div class="proj-name">Developer Salary Prediction</div>
-          <div class="proj-desc">XGBoost model with log-transform and RandomizedSearchCV hyperparameter tuning. Predicts developer salaries from survey data with a FastAPI dashboard frontend.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">XGBoost</span>
-            <span class="tag green">Dashboard</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/dev_salary_prediction_project" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 06 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">07</div>
-          <div class="proj-name">Healthcare Test Result Classification</div>
-          <div class="proj-desc">Multi-class classification predicting Normal / Abnormal / Inconclusive test results. FastAPI and Supabase backend with PostgreSQL database and a deployed pipeline.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">FastAPI</span>
-            <span class="tag green">Supabase</span>
-            <span class="tag rose">Multi-Class</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/healthcare_ml_project" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 07 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">08</div>
-          <div class="proj-name">Heart Disease Severity Classification</div>
-          <div class="proj-desc">Multi-class heart disease classifier predicting 5 severity levels (0–4). Uses SMOTE for imbalance handling, comprehensive EDA, and model comparison across algorithms.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">SMOTE</span>
-            <span class="tag green">Scikit-learn</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/Heart_disease_prediction" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 08 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">09</div>
-          <div class="proj-name">Mall Customer Segmentation</div>
-          <div class="proj-desc">K-Means and Hierarchical clustering on mall customer data. Uses the Elbow Method and Silhouette scores to determine optimal clusters, segmenting customers by spending behaviour and demographics.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">K-Means</span>
-            <span class="tag green">Clustering</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/mall_customer_segmentation" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 09 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">10</div>
-          <div class="proj-name">E-Commerce Customer Behaviour &amp; CLV</div>
-          <div class="proj-desc">RFM analysis, Customer Lifetime Value prediction, GMV forecasting, and Pareto analysis on 100K+ Olist transactions. Identifies high-value segments and churn patterns.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">RFM</span>
-            <span class="tag green">CLV</span>
-            <span class="tag rose">Forecasting</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/E_Commerce_Customer_Behavior_Analysis" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 10 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">11</div>
-          <div class="proj-name">Food Price &amp; Nutrition Analysis</div>
-          <div class="proj-desc">Exploratory analysis of food prices and nutritional content. Data cleaning, visualisation, and trend identification across food categories and markets.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">Pandas</span>
-            <span class="tag green">EDA</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/food_price_analysis" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 11 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">12</div>
-          <div class="proj-name">Ultra-Marathon Runners Analysis</div>
-          <div class="proj-desc">Statistical analysis of ultra-marathon runner performance. Explores distance, pace, age, and gender trends across race categories with rich visualisations.</div>
-          <div class="proj-tags">
-            <span class="tag">Python</span>
-            <span class="tag blue">Statistics</span>
-            <span class="tag green">Sports Analytics</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/Ultra-marathon-runners-analysis" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- 13 -->
-        <div class="glass proj-card reveal">
-          <div class="proj-num">13</div>
           <div class="proj-name">Type 2 Diabetes Risk Estimator</div>
           <div class="proj-desc">Estimates the type 2 diabetes class from nine numeric health measurements. An XGBoost pipeline handles median imputation, standardisation, and SMOTETomek resampling, and runs behind a FastAPI service with a light and dark single page form. The saved pipeline is pinned to Hugging Face revision <code>v1</code>, and every push to master runs lint, tests, and a Docker build before the image ships to GHCR and Render with a live smoke test.</div>
           <div class="proj-tags">
@@ -841,119 +741,153 @@
           </div>
         </div>
 
+        <!-- 14 -->
 
+        <div class="glass proj-card reveal">
+          <div class="proj-num">06</div>
+          <div class="proj-name">IT Ticket Classification</div>
+          <div class="proj-desc">Classifies free-text IT help desk tickets into eight topic categories from 47,837 email-style tickets, then adds a transparent High/Medium/Low priority suggestion from urgency wording rather than hiding it inside the model. A TF-IDF and LinearSVC pipeline reaches 0.856 accuracy and 0.858 macro F1, with temperature-scaled confidence and a calibration error of 0.026 so the scores mean something. Ships with Docker, a GitHub Actions pipeline and a live FastAPI demo.</div>
+          <div class="proj-tags">
+            <span class="tag">Python</span>
+            <span class="tag blue">FastAPI</span>
+            <span class="tag green">LinearSVC</span>
+            <span class="tag rose">TF-IDF</span>
+            <span class="tag">Docker</span>
+            <span class="tag blue">GitHub Actions</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://it-ticket-classification.onrender.com" target="_blank" rel="noopener noreferrer" class="proj-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/Cyrusz55/FUTURE_ML_02" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+          </div>
+        </div>
 
-      </div>
+        <!-- 15 -->
+
+        <div class="glass proj-card reveal">
+          <div class="proj-num">07</div>
+          <div class="proj-name">Store Sales Forecasting — Corporacion Favorita</div>
+          <div class="proj-desc">A 16 day forecast of items sold for every one of 54 stores and 33 product families, totalling 12,869,361 units. An ensemble of three boosted tree models is compared against a per-series SARIMAX baseline, and the error is reported honestly at two levels: 3.87 percent WAPE at chain level, 11.61 percent at store and family level. Includes a Power BI report covering chain demand, per store views, and family level change.</div>
+          <div class="proj-tags">
+            <span class="tag">Python</span>
+            <span class="tag blue">LightGBM</span>
+            <span class="tag green">SARIMAX</span>
+            <span class="tag rose">Time Series</span>
+            <span class="tag">Power BI</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Cyrusz55/FUTURE_ML_01" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- 16 -->
+
+        <div class="glass proj-card reveal">
+          <div class="proj-num">08</div>
+          <div class="proj-name">Resume Screening &amp; Ranking</div>
+          <div class="proj-desc">Takes one job description plus up to 50 resumes as pasted text, PDF or TXT, and returns a ranked shortlist with matched and missing skills and a plain language reason for each rank. Scores blend BM25, sentence embeddings and skill coverage, normalised against 2,481 reference resumes. The hybrid was validated against BM25 alone and the improvement reported with a confidence interval rather than a single number. Runs behind FastAPI in Docker with CI and a live demo.</div>
+          <div class="proj-tags">
+            <span class="tag">Python</span>
+            <span class="tag blue">FastAPI</span>
+            <span class="tag green">BM25</span>
+            <span class="tag rose">Embeddings</span>
+            <span class="tag">Docker</span>
+            <span class="tag blue">GitHub Actions</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://resume-screening-system-ksjo.onrender.com" target="_blank" rel="noopener noreferrer" class="proj-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+            <a href="https://github.com/Cyrusz55/FUTURE_ML_03" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- 17 -->
+
     </div>
 
-    <!-- GROUP 2: SQL -->
-    <div class="subgroup" id="sql-projects">
-      <div class="subgroup-head reveal">
-        <span class="subgroup-title">SQL &amp; Databases</span>
+    <div class="overflow-block reveal">
+      <div class="subgroup-head">
+        <span class="subgroup-title">More on GitHub</span>
         <span class="subgroup-line"></span>
-        <span class="subgroup-count">3 projects</span>
+        <span class="subgroup-count">17 more builds</span>
       </div>
-      <div class="projects-grid">
-
-        <div class="glass proj-card reveal">
-          <div class="proj-num">SQL — 01</div>
-          <div class="proj-name">Customer, Products &amp; Sales Database</div>
-          <div class="proj-desc">Full PostgreSQL schema for a retail business: Customers, Products, Sales, and Inventory tables with foreign key constraints. A 23KB SQL file with 30+ customer records, aggregate queries (COUNT, AVG, SUM), and complex joins.</div>
-          <div class="proj-tags">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag blue">Schema Design</span>
-            <span class="tag green">Foreign Keys</span>
-            <span class="tag rose">Joins</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/transaction_analysis" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <div class="glass proj-card reveal">
-          <div class="proj-num">SQL — 02</div>
-          <div class="proj-name">Bookstore Order Management System</div>
-          <div class="proj-desc">PostgreSQL practice in DBeaver: customers, books, and orders schema with SERIAL primary keys, NUMERIC pricing, REFERENCES constraints, and Kenyan-named sample data.</div>
-          <div class="proj-tags">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag blue">DBeaver</span>
-            <span class="tag green">Constraints</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/SQL-project" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <div class="glass proj-card reveal">
-          <div class="proj-num">SQL — 03</div>
-          <div class="proj-name">Mwendo Coffee — Supply Chain Analytics</div>
-          <div class="proj-desc">End-to-end PostgreSQL analytics platform modelling a Kenyan direct-trade coffee supply chain, from smallholder cherry delivery through milling, export shipment, and farmer payout. Ten relational tables in an isolated schema, with full foreign-key and CHECK constraints, indexed join columns, and deterministic SQL-native seeding. Nineteen analytical queries build the picture across three layers: multi-table joins and conditional aggregation, window functions for running totals, rolling averages, rankings and Pareto concentration, then recursive CTEs for calendar spines, gaps-and-islands streak detection, and cohort retention. Includes a Python orchestrator that rebuilds the database and exports every result set as CSV.</div>
-          <div class="proj-tags">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag blue">Window Functions</span>
-            <span class="tag green">Recursive CTEs</span>
-            <span class="tag rose">Cohort Analysis</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/SQL_ANALYTICS_PROJECT" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
+      <div class="overflow-grid">
+          <a class="ov-item" href="https://github.com/Cyrusz55/dev_salary_prediction_project" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Dev Salary Prediction</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/Japan_car_price_prediction_project" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Japanese Car Price Prediction</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/Heart_disease_prediction" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Heart Disease Severity</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/healthcare_ml_project" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Healthcare Test Result Classification</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/mall_customer_segmentation" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Mall Customer Segmentation</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/food_price_analysis" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Food Price &amp; Nutrition Analysis</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/Ultra-marathon-runners-analysis" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Ultra-Marathon Runners Analysis</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/E_Commerce_Customer_Behavior_Analysis" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">E-Commerce Behaviour &amp; CLV</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/water_pump_func_pred" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Water Pump Functional Prediction</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/Jumia_Sale_Analysis" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Jumia Sale Analysis</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/figkit" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">FigKit — Figure Toolkit</span>
+            <span class="ov-tag">ML</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/transaction_analysis" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Customer, Products &amp; Sales DB</span>
+            <span class="ov-tag">SQL</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/SQL-project" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Bookstore Order Management</span>
+            <span class="ov-tag">SQL</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/SQL_ANALYTICS_PROJECT" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Mwendo Coffee Supply Chain</span>
+            <span class="ov-tag">SQL</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/kenyan_startups_analysis" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Kenyan Startups Dashboard</span>
+            <span class="ov-tag">BI</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/March_PowerBI_dashboard" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">March Power BI Dashboard</span>
+            <span class="ov-tag">BI</span>
+          </a>
+          <a class="ov-item" href="https://github.com/Cyrusz55/powerBI-assignment" target="_blank" rel="noopener noreferrer">
+            <span class="ov-name">Medical Data Dashboard</span>
+            <span class="ov-tag">BI</span>
+          </a>
       </div>
-    </div>
-
-    <!-- GROUP 3: POWER BI -->
-    <div class="subgroup" id="bi-projects">
-      <div class="subgroup-head reveal">
-        <span class="subgroup-title">Power BI &amp; Excel</span>
-        <span class="subgroup-line"></span>
-        <span class="subgroup-count">3 projects</span>
-      </div>
-      <div class="projects-grid">
-
-        <div class="glass proj-card reveal">
-          <div class="proj-num">BI — 01</div>
-          <div class="proj-name">Kenyan Startups Analysis Dashboard</div>
-          <div class="proj-desc">Interactive Power BI dashboard analysing 179 Kenyan startups with $2.21B cumulative funding across 72 industries. Features top-10 concentration analysis, sector breakdown (agri, fintech, energy), and funding trend visualisations.</div>
-          <div class="proj-tags">
-            <span class="tag">Power BI</span>
-            <span class="tag blue">DAX</span>
-            <span class="tag green">Startup Analytics</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/kenyan_startups_analysis" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <div class="glass proj-card reveal">
-          <div class="proj-num">BI — 02</div>
-          <div class="proj-name">March Power BI Dashboard</div>
-          <div class="proj-desc">A comprehensive Power BI dashboard built for monthly performance tracking. Features KPI cards, trend analysis, and interactive filters for month-over-month reporting.</div>
-          <div class="proj-tags">
-            <span class="tag">Power BI</span>
-            <span class="tag blue">KPIs</span>
-            <span class="tag green">Monthly Reporting</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/March_PowerBI_dashboard" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-        <div class="glass proj-card reveal">
-          <div class="proj-num">BI — 03</div>
-          <div class="proj-name">Medical Data Dashboard</div>
-          <div class="proj-desc">Power BI dashboard built on medical and healthcare data. Features interactive visualisations for health metrics analysis and patient data exploration.</div>
-          <div class="proj-tags">
-            <span class="tag">Power BI</span>
-            <span class="tag blue">Healthcare</span>
-            <span class="tag green">Visualisation</span>
-          </div>
-          <div class="proj-links">
-            <a href="https://github.com/Cyrusz55/powerBI-assignment" target="_blank" rel="noopener" class="proj-link">GitHub →</a>
-          </div>
-        </div>
-
-      </div>
+      <a class="overflow-all" href="https://github.com/Cyrusz55?tab=repositories" target="_blank" rel="noopener noreferrer">
+        Browse all repositories on GitHub →
+      </a>
     </div>
 
   </div>
